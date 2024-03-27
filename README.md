@@ -1,2 +1,2 @@
-# Random Data Generator v2
-Documentation coming soon.
+# random-data-generator
+Generates random data for unit testing as per user inputs
