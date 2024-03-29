@@ -140,8 +140,7 @@ const formatDisplayName = (text) => {
 
 //Load Initial Data
 onMounted(() => {
-  updateRandomData();
-  addToast('Data has been loaded');
+
 
   const storedLocale = localStorage.getItem('selectedLocale');
   if (storedLocale && storedLocale in localeOptions.value) {
@@ -149,6 +148,9 @@ onMounted(() => {
   } else {
     selectedLocale.value = 'en_IN'; // Default value if not found in localStorage
   }
+
+  updateRandomData();
+  addToast('Data has been loaded');
 
 }
 );
@@ -182,13 +184,15 @@ const saveLocaleToStorage = () => {
           {{ option.name }}
         </option>
       </select>
-      <PrimaryButton @click="saveLocaleToStorage" class="ml-4 !p-2 !border-gray-300 rounded-full" title="Save locale">
+      <button @click="saveLocaleToStorage"
+        class="bg-blue-600 dark:text-gray-800 dark:hover:bg-white inline-flex items-center dark:bg-gray-200 border border-transparent hover:bg-blue-800 focus:bg-blue-900 active:bg-blue-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ml-4 p-2 rounded-full"
+        title="Save locale">
         <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 fill-current h-6 w-6" width="24" height="24"
           viewBox="0 -960 960 960">
           <path
             d="M212.309-140.001q-30.308 0-51.308-21t-21-51.308v-535.382q0-30.308 21-51.308t51.308-21h429.306q14.461 0 27.807 5.616 13.347 5.615 23.193 15.461l106.307 106.307q9.846 9.846 15.461 23.193 5.616 13.346 5.616 27.807v429.306q0 30.308-21 51.308t-51.308 21H212.309ZM760-646 646-760H212.309q-5.385 0-8.847 3.462-3.462 3.462-3.462 8.847v535.382q0 5.385 3.462 8.847 3.462 3.462 8.847 3.462h535.382q5.385 0 8.847-3.462 3.462-3.462 3.462-8.847V-646ZM480-269.233q41.538 0 70.768-29.23 29.231-29.231 29.231-70.768 0-41.538-29.231-70.769-29.23-29.23-70.768-29.23T409.232-440q-29.231 29.231-29.231 70.769 0 41.537 29.231 70.768 29.23 29.23 70.768 29.23ZM291.539-564.616h256.152q15.462 0 25.808-10.346t10.346-25.807v-67.692q0-15.461-10.346-25.807-10.346-10.346-25.808-10.346H291.539q-15.461 0-25.807 10.346-10.346 10.346-10.346 25.807v67.692q0 15.461 10.346 25.807 10.346 10.346 25.807 10.346ZM200-646v446-560 114Z" />
         </svg>
-      </PrimaryButton>
+      </button>
     </div>
   </div>
   <!-- Top Container Ends-->
