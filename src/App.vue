@@ -1,6 +1,5 @@
 <script setup>
-import Main from './components/Main.vue';
-import Faker from './components/Faker.vue';
+import Faker from './pages/Faker.vue';
 </script>
 
 <template>
