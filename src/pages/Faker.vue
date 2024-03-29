@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { faker, allFakers, allLocales } from '@faker-js/faker';
 import { LOCALE_NAMES } from '../assets/js/localeConstants';
+import RandExp from 'randexp';
 
 import InputText from './components/InputText.vue';
 import InputLabel from './components/InputLabel.vue';
@@ -55,6 +56,25 @@ const fakerInstance = computed(() => {
   return faker;
 });
 
+// Identity Section
+// Generate a random string based on the provided regular expression pattern
+const generateRandomString = (pattern) => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let result = '';
+  for (let i = 0; i < pattern.length; i++) {
+    if (pattern[i] === 'A') {
+      // Append a random uppercase letter
+      result += characters.charAt(Math.floor(Math.random() * 26));
+    } else if (pattern[i] === '0') {
+      // Append a random digit
+      result += characters.charAt(Math.floor(Math.random() * 36) + 26);
+    } else {
+      // Append the character from the pattern
+      result += pattern[i];
+    }
+  }
+  return result;
+};
 
 const randomData = ref({});
 const selectedGender = ref('male');
@@ -65,8 +85,14 @@ const updateRandomData = () => {
   const firstName = getValue('person.firstName', [gender]);//fakerInstance.value.person.firstName();
   const lastName = getValue('person.lastName');//fakerInstance.value.person.lastName();
   const middleName = getValue('person.firstName', ['male']);
-  const companyAddress = `${getValue('location.buildingNumber')}, ${getValue('location.city')}, ${getValue('location.state')}, ${getValue('location.zipCode')}`
-  const email = getValue('internet.email', [{ firstName : firstName , lastName : lastName,  provider: 'test.example.com'}]);
+  const companyAddress = `${getValue('location.buildingNumber')}, ${getValue('location.city')}, ${getValue('location.state')}`
+  const email = getValue('internet.email', [{ firstName: firstName, lastName: lastName, provider: 'test.example.com' }]);
+
+  const licenseState = new RandExp(/^[A-Z]{2}$/).gen();
+  const licenseRng = new RandExp(/^[1-9]{4}$/).gen();
+  const randomnumber = Math.floor(Math.random() * 10)
+  const today = new Date();
+  const licenseYear = today.getFullYear() - randomnumber;
 
   const data = {
     person: {
@@ -76,62 +102,40 @@ const updateRandomData = () => {
       middleName,
       //gender,
       email,
-      phone : getValue('phone.number'),
+      phone: getValue('phone.number'),
     },
     address: {
-      buildingNumber : getValue('location.secondaryAddress'),
+      buildingNumber: getValue('location.secondaryAddress'),
       streetAddress: getValue('location.streetAddress'), //fakerInstance.value.location.streetAddress(),
       city: getValue('location.city'), //fakerInstance.value.location.city(),
       state: getValue('location.state'),
       zipCode: getValue('location.zipCode'),
-      GPSCoordinate : getValue('location.nearbyGPSCoordinate')
+      gpsCoordinate: getValue('location.nearbyGPSCoordinate').toString(),
+    },
+    personalIdentity: {
+      panCard: new RandExp(/[A-Z]{5}[0-9]{4}[A-Z]{1}/).gen(),
+      voterId: new RandExp(/[A-Z]{3}[0-9]{6}/).gen(),
+      passportNumber: new RandExp(/^[A-Z][0-9]{7}$/).gen(),
+      aadharCard: new RandExp(/^[0-9]{4}[ ][0-9]{4}[ ][0-9]{4}$/).gen(),
+      socialSecurityNumber: new RandExp(/[1-9]{3}-[1-9]{2}-[1-9]{4}/).gen(),
+      drivingLicense: licenseState + licenseYear + '000' + licenseRng,
     },
     company: {
       jobType: getValue('person.jobType'),
-      jobProfile : getValue('person.jobTitle'),
+      jobProfile: getValue('person.jobTitle'),
       companyName: getValue('company.name'),//fakerInstance.value.company.name(),
-      companyAddress//fakerInstance.value.company.catchPhrase(),
-      
+      companyAddress,//fakerInstance.value.company.catchPhrase(),
+      ZipCode: getValue('location.zipCode'),
     },
+
     // Add more items as needed
   }
   randomData.value = data;
 }
 
-// Change JSON Key names
-const displayNames = {
-  person: 'Personal',
-  address: 'Address',
-  company: 'Company',
-  fullName: 'Full Name',
-  firstName: 'First Name',
-  lastName: 'Last Name',
-  middleName: 'Middle Name',
-  gender: 'Gender',
-  streetAddress: 'Street Address',
-  city: 'City',
-  state: 'State',
-  zipCode: 'ZIP Code',
-  companyName: 'Company Name',
-  jobType: 'Job Type',
-  jobProfile: 'Job Profile',
-  companyAddress: 'Address',
-  email : 'Email',
-  phone : 'Phone',
-  buildingNumber : 'Building',
-  GPSCoordinate : 'GPS Coordinates'
-  // Add more display names as needed
-}
-
-//Show Display Name on UI
-const getDisplayName = (key, subKey) => {
-  if (subKey) {
-    const itemDisplayName = displayNames[key] || key
-    const subItemDisplayName = displayNames[subKey] || subKey
-    return ` ${subItemDisplayName}`
-  }
-
-  return displayNames[key] || key
+const formatDisplayName = (text) => {
+  const formattedText = text.replace(/([a-z])([A-Z])/g, '$1 $2')
+  return formattedText.charAt(0).toUpperCase() + formattedText.slice(1)
 }
 
 //Load Initial Data
@@ -169,19 +173,27 @@ onMounted(() => {
     </div>
 
     <!-- Main Random Data Container Starts -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4">
       <div v-for="(item, key) in randomData" :key="key"
         class="p-6 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700">
-        <h3 class="text-lg font-bold mb-2">{{ getDisplayName(key) }}</h3>
+        <h3 class="text-lg font-bold mb-2">{{ formatDisplayName(key) }}</h3>
         <div v-for="(subItem, subKey) in item" :key="subKey" class="text-gray-700">
           <!-- <template v-if="subKey == 'fullName'">
           </template> -->
-          <InputLabel :value="getDisplayName(key, subKey)" class="my-1" />
-          <InputText :value="subItem" :placeholder="getDisplayName(key, subKey)" class="mb-4" />
+          <InputLabel :value="formatDisplayName(subKey)" class="my-1" />
+          <InputText :value="subItem" class="mb-4" />
         </div>
       </div>
     </div>
     <!-- Main Random Data Container Ends -->
+
+    <!-- <div class="container mx-auto p-4">
+      <pre class="bg-gray-900 text-gray-50 rounded-md p-8">
+        {{ randomData }}
+      </pre>
+    </div> -->
+
+
   </div>
 
 </template>
