@@ -18,8 +18,6 @@ const localeOptions = computed(() => {
 })
 
 const selectedLocale = ref('en_IN');
-const localizedRandomName = ref('');
-const localizedRandomAddress = ref('');
 
 const fakerInstance = computed(() => {
   if (selectedLocale.value) {
@@ -33,7 +31,6 @@ const fakerInstance = computed(() => {
 
 const generateData = () => {
   updateRandomData();
-  //faker.person.
 }
 
 const randomData = ref({});
@@ -48,33 +45,21 @@ const updateRandomData = () => {
       firstName,
       lastName,
       gender: fakerInstance.value.person.gender(),
-      // Add more person data as needed
     },
     address: {
       streetAddress: fakerInstance.value.location.streetAddress(),
       city: fakerInstance.value.location.city(),
       state: fakerInstance.value.location.state(),
-      zipCode: fakerInstance.value.location.zipCode(),
-      // Add more address data as needed
+      zipCode: fakerInstance.value.location?.zipCode(),
     },
     company: {
       companyName: fakerInstance.value.company.name(),
       catchPhrase: fakerInstance.value.company.catchPhrase(),
-      //bs: fakerInstance.value.company.bs(),
-      // Add more company data as needed
     },
     // Add more items as needed
   }
   //console.log('data -->' + JSON.stringify(data));
   randomData.value = data;
-}
-
-const updateRandomData_old = () => {
-  if (fakerInstance.value) {
-    localizedRandomName.value = fakerInstance.value.person.fullName();
-    localizedRandomAddress.value = fakerInstance.value.location.streetAddress();
-    //console.log('person --> ' + fakerInstance.value.person.firstName());
-  }
 }
 
 const displayNames = {
@@ -144,8 +129,8 @@ onMounted(() => updateRandomData());
         <h3 class="text-lg font-bold mb-2">{{ getDisplayName(key) }}</h3>
         <div v-for="(subItem, subKey) in item" :key="subKey" class="text-gray-700">
           <!-- <p>{{ getDisplayName(key, subKey) }}: {{ subItem }}</p> -->
-          <InputLabel :value="getDisplayName(key, subKey)" class="my-1"/>
-          <InputText :value="subItem" :placeholder="getDisplayName(key, subKey)" class="mb-4"/>
+          <InputLabel :value="getDisplayName(key, subKey)" class="my-1" />
+          <InputText :value="subItem" :placeholder="getDisplayName(key, subKey)" class="mb-4" />
         </div>
       </div>
     </div>
