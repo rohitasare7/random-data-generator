@@ -66,6 +66,7 @@ const updateRandomData = () => {
   const lastName = getValue('person.lastName');//fakerInstance.value.person.lastName();
   const middleName = getValue('person.firstName', ['male']);
   const companyAddress = `${getValue('location.buildingNumber')}, ${getValue('location.city')}, ${getValue('location.state')}, ${getValue('location.zipCode')}`
+  const email = getValue('internet.email', [{ firstName : firstName , lastName : lastName,  provider: 'test.example.com'}]);
 
   const data = {
     person: {
@@ -73,18 +74,24 @@ const updateRandomData = () => {
       firstName,
       lastName,
       middleName,
-      gender,
+      //gender,
+      email,
+      phone : getValue('phone.number'),
     },
     address: {
+      buildingNumber : getValue('location.secondaryAddress'),
       streetAddress: getValue('location.streetAddress'), //fakerInstance.value.location.streetAddress(),
       city: getValue('location.city'), //fakerInstance.value.location.city(),
       state: getValue('location.state'),
       zipCode: getValue('location.zipCode'),
+      GPSCoordinate : getValue('location.nearbyGPSCoordinate')
     },
     company: {
       jobType: getValue('person.jobType'),
+      jobProfile : getValue('person.jobTitle'),
       companyName: getValue('company.name'),//fakerInstance.value.company.name(),
       companyAddress//fakerInstance.value.company.catchPhrase(),
+      
     },
     // Add more items as needed
   }
@@ -106,8 +113,13 @@ const displayNames = {
   state: 'State',
   zipCode: 'ZIP Code',
   companyName: 'Company Name',
-  catchPhrase: 'Catch Phrase',
-  bs: 'BS',
+  jobType: 'Job Type',
+  jobProfile: 'Job Profile',
+  companyAddress: 'Address',
+  email : 'Email',
+  phone : 'Phone',
+  buildingNumber : 'Building',
+  GPSCoordinate : 'GPS Coordinates'
   // Add more display names as needed
 }
 
