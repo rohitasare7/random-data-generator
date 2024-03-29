@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { faker, allFakers, allLocales } from '@faker-js/faker';
 import { LOCALE_NAMES } from '../assets/js/localeConstants';
 
@@ -35,7 +35,7 @@ const updateRandomData = () => {
     }
 }
 
-
+onMounted(() => updateRandomData());
 </script>
 
 <template>
