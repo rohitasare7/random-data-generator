@@ -36,7 +36,7 @@ const copyValue = (value, isCopy) => {
     // console.log(value);
     if (isCopy) {
         navigator.clipboard.writeText(value);
-        addToast('Value copide to clipboard.');
+        addToast('Value copied to clipboard.');
     }
 
 }
