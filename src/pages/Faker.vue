@@ -173,7 +173,7 @@ const saveLocaleToStorage = () => {
   <!-- Top Container Starts-->
   <div class="container mx-auto p-4">
     <h2
-      class="uppercase tracking-wider leading-snug items-center text-center my-4 md:my-6 text-4xl font-extrabold text-gray-900 dark:text-slate-50 md:text-5xl lg:text-6xl">
+      class="uppercase tracking-wider leading-snug items-center text-center my-8 md:my-6 text-4xl font-extrabold text-gray-900 dark:text-slate-50 md:text-5xl lg:text-6xl">
       Random Data Generator</h2>
     <div class="flex items-center justify-center mt-8">
       <InputLabel value="Select Locale" class="mx-0 mr-2 md:mx-4" />
