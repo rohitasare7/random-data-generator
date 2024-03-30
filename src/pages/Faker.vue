@@ -173,22 +173,22 @@ const saveLocaleToStorage = () => {
   <!-- Top Container Starts-->
   <div class="container mx-auto p-4">
     <h2
-      class="items-center text-center my-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+      class="uppercase tracking-wider leading-snug items-center text-center my-4 md:my-6 text-4xl font-extrabold text-gray-900 dark:text-slate-50 md:text-5xl lg:text-6xl">
       Random Data Generator</h2>
     <div class="flex items-center justify-center mt-8">
       <InputLabel value="Select Locale" class="mx-0 mr-2 md:mx-4" />
       <select id="locale-select" v-model="selectedLocale" @change="updateRandomData"
-        class="w-56 md:w-72 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 !outline-none">
+        class="w-56 md:w-72 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 !outline-none">
         <option value="" disabled>Select a locale</option>
         <option v-for="(option, locale) in localeOptions" :key="locale" :value="locale">
           {{ option.name }}
         </option>
       </select>
       <button @click="saveLocaleToStorage"
-        class="bg-blue-600 dark:text-gray-800 dark:hover:bg-white inline-flex items-center dark:bg-gray-200 border border-transparent hover:bg-blue-800 focus:bg-blue-900 active:bg-blue-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ml-4 p-2 rounded-full"
+        class="bg-blue-600 dark:hover:bg-white inline-flex items-center dark:bg-gray-200 shadow-md border border-transparent hover:bg-blue-800 focus:bg-blue-900 active:bg-blue-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 ml-4 p-2 rounded-full"
         title="Save locale">
-        <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 fill-current h-6 w-6" width="24" height="24"
-          viewBox="0 -960 960 960">
+        <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 dark:text-gray-800 fill-current h-6 w-6" width="24"
+          height="24" viewBox="0 -960 960 960">
           <path
             d="M212.309-140.001q-30.308 0-51.308-21t-21-51.308v-535.382q0-30.308 21-51.308t51.308-21h429.306q14.461 0 27.807 5.616 13.347 5.615 23.193 15.461l106.307 106.307q9.846 9.846 15.461 23.193 5.616 13.346 5.616 27.807v429.306q0 30.308-21 51.308t-51.308 21H212.309ZM760-646 646-760H212.309q-5.385 0-8.847 3.462-3.462 3.462-3.462 8.847v535.382q0 5.385 3.462 8.847 3.462 3.462 8.847 3.462h535.382q5.385 0 8.847-3.462 3.462-3.462 3.462-8.847V-646ZM480-269.233q41.538 0 70.768-29.23 29.231-29.231 29.231-70.768 0-41.538-29.231-70.769-29.23-29.23-70.768-29.23T409.232-440q-29.231 29.231-29.231 70.769 0 41.537 29.231 70.768 29.23 29.23 70.768 29.23ZM291.539-564.616h256.152q15.462 0 25.808-10.346t10.346-25.807v-67.692q0-15.461-10.346-25.807-10.346-10.346-25.808-10.346H291.539q-15.461 0-25.807 10.346-10.346 10.346-10.346 25.807v67.692q0 15.461 10.346 25.807 10.346 10.346 25.807 10.346ZM200-646v446-560 114Z" />
         </svg>
@@ -207,8 +207,8 @@ const saveLocaleToStorage = () => {
     <!-- Main Random Data Container Starts -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 md:p-0 mt-2">
       <div v-for="(item, key) in randomData" :key="key"
-        class="p-6 bg-white border border-gray-200 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700">
-        <h3 class="text-lg font-bold mb-2">{{ formatDisplayName(key) }}</h3>
+        class="p-6 bg-white border border-gray-200 rounded-lg shadow-lg dark:shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+        <h3 class="text-lg font-bold mb-2 dark:text-gray-300">{{ formatDisplayName(key) }}</h3>
         <div v-for="(subItem, subKey) in item" :key="subKey" class="text-gray-700">
           <!-- <template v-if="subKey == 'fullName'">
           </template> -->

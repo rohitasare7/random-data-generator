@@ -3,9 +3,9 @@
 </script>
 <template>
     <footer
-        class="p-8 container mx-auto mb-10 bg-white rounded-lg shadow-xl md:flex md:items-center md:justify-between md:p-6 xl:p-8 dark:bg-gray-800 border dark:border-gray-700">
-        
-        <div class="flex space-x-6 sm:justify-center">
+        class="p-8 container mx-auto mt-8 mb-10 bg-white rounded-lg shadow-xl dark:shadow-2xl md:flex md:items-center md:justify-between md:p-6 xl:p-8 dark:bg-gray-800 border dark:border-gray-700">
+
+        <div class="flex space-x-6 justify-center items-center">
             <a href="https://www.instagram.com/thatsalesforceguy/" target="_blank"
                 class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="26" height="26" viewBox="0 0 48 48">
@@ -49,6 +49,11 @@
                     <path fill="#FFF" d="M20 31L20 17 32 24z"></path>
                 </svg>
             </a>
+            <a href="https://www.youtube.com/@ThatSalesforceGuy" target="_blank"
+                class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white text-sm">
+                Request Feature
+            </a>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Please consider bookmarking this URL for convenient and quick access in the future.</p>
         </div>
 
         <!-- <ul class="flex flex-wrap items-center mb-6 space-y-1 md:mb-0">
@@ -57,9 +62,17 @@
             <a href="mailto:thatsfdcguy@gmail.com" class="text-gray-500 hover:underline md:mr-6 dark:text-gray-400">Contact</a>
         </ul> -->
 
-        <p class="text-sm text-center text-gray-500">Built with Love by <a
-                href="https://www.instagram.com/thatsalesforceguy/" target="_blank" class="font-semibold">That
-                Salesforce Guy</a></p>
+        <p class="text-sm text-center text-gray-500 dark:text-gray-400 mt-4 md:mt-0 flex items-center justify-center">
+            Built with
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="inline-block mr-1 ml-1">
+                <path fill="#f05542"
+                    d="M5.301 3.002c-.889-.047-1.759.247-2.404.893-1.29 1.292-1.175 3.49.26 4.926l.515.515L8.332 14l4.659-4.664.515-.515c1.435-1.437 1.55-3.634.26-4.926-1.29-1.292-3.483-1.175-4.918.262l-.516.517-.517-.517C7.098 3.438 6.19 3.049 5.3 3.002z">
+                </path>
+            </svg>
+            by 
+            <a href="https://www.instagram.com/thatsalesforceguy/" target="_blank"
+                class="font-semibold dark:text-gray-300 ml-1">That Salesforce Guy</a>
+        </p>
     </footer>
 
 </template>
