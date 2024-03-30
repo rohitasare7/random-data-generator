@@ -70,7 +70,7 @@
                 </path>
             </svg>
             by 
-            <a href="https://www.instagram.com/thatsalesforceguy/" target="_blank"
+            <a href="https://www.youtube.com/@ThatSalesforceGuy" target="_blank"
                 class="font-semibold dark:text-gray-300 ml-1">That Salesforce Guy</a>
         </p>
     </footer>
